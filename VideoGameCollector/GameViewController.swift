@@ -35,6 +35,19 @@ class GameViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func addButton(_ sender: Any) {
         
+        //Used for Core Date
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let game = Game(context: context)
+        
+        game.title = titleTextField.text
+        
+        //NSDate needs to do either PNG or JPG
+        game.image = UIImagePNGRepresentation(gameImageView.image!) as! NSData
+        
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
         
     }
     @IBAction func photosButton(_ sender: Any) {
