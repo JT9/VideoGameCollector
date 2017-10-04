@@ -112,6 +112,11 @@ class GameViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func cameraButton(_ sender: Any) {
         
+        //Source from camera
+        imagePicker.sourceType = .camera
+        
+        //Place another ViewController on the screen
+        present(imagePicker, animated: true, completion: nil)
         
     }
     
