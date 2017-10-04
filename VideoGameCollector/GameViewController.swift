@@ -48,6 +48,9 @@ class GameViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
+        //Go back after user clicks Add button
+        navigationController!.popViewController(animated: true)
+        
         
     }
     @IBAction func photosButton(_ sender: Any) {
