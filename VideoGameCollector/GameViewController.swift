@@ -47,6 +47,19 @@ class GameViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
+    //Function used when a user selects an image from their own personal photo collection
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let imageSelected = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        //Outlet changes based on selected image
+        gameImageView.image = imageSelected
+        
+        //Removes the view after selecting an image
+        imagePicker.dismiss(animated: true, completion: nil)
+        
+    }
+    
     @IBAction func cameraButton(_ sender: Any) {
         
         
