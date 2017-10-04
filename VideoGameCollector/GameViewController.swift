@@ -17,14 +17,37 @@ class GameViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBOutlet weak var titleTextField: UITextField!
     
+    @IBOutlet weak var addUpdateButton: UIButton!
+    
+    
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    
     //Create property imagePicker and set a new object to it
     var imagePicker = UIImagePickerController()
+    
+    //If game is equal to nil means brand new game otherwise pass the existing game into this property
+    var game : Game? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Object pulls information from the delegate for it's need
         imagePicker.delegate = self
+        
+        if game != nil {
+            
+            print("We have a game")
+            
+            gameImageView.image = UIImage(data: game!.image as! Data)
+            titleTextField.text = game!.title
+            
+            addUpdateButton.setTitle("Update", for: .normal)
+            
+        } else {
+            deleteButton.isHidden = true
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
