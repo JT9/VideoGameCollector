@@ -58,16 +58,27 @@ class GameViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func addButton(_ sender: Any) {
         
-        //Used for Core Date
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        let game = Game(context: context)
+        //If game is not nil then just set the title and the image
+        if game != nil {
         
-        game.title = titleTextField.text
+            game!.title = titleTextField.text
+            
+            //NSDate needs to do either PNG or JPG
+            game!.image = UIImagePNGRepresentation(gameImageView.image!) as! NSData
         
-        //NSDate needs to do either PNG or JPG
-        game.image = UIImagePNGRepresentation(gameImageView.image!) as! NSData
-        
+        //New game
+        } else {
+            //Used for Core Date
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            
+            let game = Game(context: context)
+            
+            game.title = titleTextField.text
+            
+            //NSDate needs to do either PNG or JPG
+            game.image = UIImagePNGRepresentation(gameImageView.image!) as! NSData
+        }
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
@@ -101,6 +112,20 @@ class GameViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func cameraButton(_ sender: Any) {
         
+        
+    }
+    
+    
+    @IBAction func deleteButton(_ sender: Any) {
+        
+        //Used for Core Date
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        context.delete(game!)
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        //Go back after user clicks Add button
+        navigationController!.popViewController(animated: true)
         
     }
     
